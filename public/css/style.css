@@ -94,3 +94,67 @@ p a {
 p a:hover {
     color: #1976D2;
 }
+
+.listHeader{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 5rem;
+
+    background-color: #001EC5;
+    border-radius: 0 0 10px 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.listHeader button{
+    margin-right: 20px;
+}
+
+.listIdeas {
+  width: 100%;
+  height: fit-content;
+}
+
+.ideasGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  list-style: none;
+  margin-top: 6rem;
+  padding: 0 1.5rem;
+}
+
+/* Card */
+.ideaCard {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  box-shadow: -8px 0 0 #AAD5E3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ideaCard hr {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #D3D3D3;
+  margin: 8px 0;
+}
+
+.info{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.category{
+    background-color: #AAD5E3;
+    padding: 0.5rem;
+    border-radius: 8px;
+}
