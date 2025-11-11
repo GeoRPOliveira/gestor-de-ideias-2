@@ -13,16 +13,15 @@ const ideaController = {
         idea.dislikes = votes.filter(v => v.type === 'dislike').map(v => v.userId.username);
       }
 
-      res.render("ideas/list", { ideas, user: req.user });
+      res.render("ideas/list", { ideas, user: req.session.user });
     } catch (err) {
       console.error(err);
       res.status(500).send("Erro ao carregar ideias.");
     }
   },
 
-
   createIdea(req, res) {
-    res.render("ideas/create", { user: req.user });
+    res.render("ideas/create", { user: req.session.user });
   },
 
   async saveIdea(req, res) {
@@ -33,10 +32,8 @@ const ideaController = {
         title,
         description,
         category,
-        createdBy: req.user?._id || null,
+        createdBy: req.session.user?._id || null,
       });
-
-      console.log("newIdea:", newIdea);
 
       await newIdea.save();
       res.redirect("/ideas");
@@ -58,13 +55,12 @@ const ideaController = {
       idea.likes = votes.filter(v => v.type === 'like').map(v => v.userId.username);
       idea.dislikes = votes.filter(v => v.type === 'dislike').map(v => v.userId.username);
 
-      res.render("ideas/details", { idea, user: req.user });
+      res.render("ideas/details", { idea, user: req.session.user });
     } catch (err) {
       console.error(err);
       res.status(500).send("Erro ao carregar detalhes da ideia.");
     }
   },
-
 };
 
 export default ideaController;

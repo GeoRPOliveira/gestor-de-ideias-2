@@ -3,6 +3,7 @@ import { connectDB } from "./db/conn.js";
 import express from "express";
 import exphbs from "express-handlebars";
 import authRoutes from "./routes/authRoutes.js";
+import ideaRoutes from "./routes/ideaRoutes.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -34,8 +35,11 @@ app.use(
   })
 );
 
+// Rotas
 app.use("/", authRoutes);
+app.use("/ideas", ideaRoutes);
 
+// Redireciona para login
 app.get("/", (req, res) => {
   res.redirect("/login");
 });

@@ -1,0 +1,23 @@
+<div class="listIdeas">
+  <ul class="ideasGrid">
+    {{#each ideas}}
+      <li class="ideaCard" data-id="{{this._id}}">
+        <h3>{{this.title}}</h3>
+        <h5 class="voteCount">{{this.likes.length}} voto(s)</h5>
+        <hr />
+        <p>{{this.description}}</p>
+        <div class="info">
+          <div class="vote">
+            <img src="/images/like.svg" alt="like" class="like" data-type="like">
+            Gostei
+            <img src="/images/dislike.svg" alt="dislike" class="dislike" data-type="dislike">
+            Não gostei  
+          </div>
+          <div class="category">
+            {{this.category}}
+          </div>
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+</div>
