@@ -1,0 +1,22 @@
+{
+  "name": "gestor-de-ideias-2",
+  "version": "1.0.0",
+  "description": "Esse projeto servira para gerir ideias, adicionar, ver as ideias dos amigos, editar as suas e deletar.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GeoRPOliveira/gestor-de-ideias-2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GeoRPOliveira/gestor-de-ideias-2/issues"
+  },
+  "homepage": "https://github.com/GeoRPOliveira/gestor-de-ideias-2#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
