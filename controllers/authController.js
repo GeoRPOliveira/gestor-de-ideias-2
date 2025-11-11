@@ -34,8 +34,8 @@ const authController = {
   async login(req, res) {
     try {
       const { email, password } = req.body;
-
       const user = await User.findOne({ email });
+
       if (!user) {
         return res.status(400).send("Email ou senha incorretos.");
       }
@@ -50,10 +50,11 @@ const authController = {
         name: user.name,
         username: user.username
       };
+      console.log("SESSION SET:", req.session.user);
 
       res.redirect("/ideas");
     } catch (err) {
-      console.error(err);
+      console.error("ERRO LOGIN:", err);
       res.status(500).send("Erro ao fazer login.");
     }
   },
