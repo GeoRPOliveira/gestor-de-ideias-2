@@ -1,0 +1,14 @@
+<div class="createIdea">
+    <header class="createHeader">
+        <a href="/ideas"><button>Voltar</button></a>
+        <a href="/logout"><button>Logout</button></a>
+    </header>
+    <form action="/ideas/create" method="POST" class="create-form">
+        <h1>Criar Nova Ideia</h1>
+        <input type="text" name="title" placeholder="Título" required>
+        <input type="text" name="category" placeholder="Categoria" required>
+        <textarea name="description" placeholder="Descrição" required></textarea>
+        <button type="submit">Salvar</button>
+        <a href="/ideas">Voltar</a>
+    </form>
+</div>
