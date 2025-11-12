@@ -10,13 +10,17 @@
         <h5 class="voteCount">{{this.likes.length}} voto(s)</h5>
         <p>Por: {{this.createdBy}}</p>
         <hr />
-        <p>{{this.description}}</p>
+        <p class="description">{{this.description}}</p>
         <div class="info">
-            <div>
+            <div class="info-left">
                 <button class="like">Votar</button>
                 {{#if this.isOwner}}
-                    <a href=""><img src="images/lixeira.svg" alt="lixeira"></a>
-                    <a href=""><img src="images/brush.svg" alt="brush"></a>
+                    <a href="/ideas/{{this._id}}/delete" class="delete-link">
+                        <img src="images/lixeira.svg" alt="lixeira">
+                    </a>
+                    <a href="/ideas/{{this._id}}/edit">
+                        <img src="images/brush.svg" alt="brush">
+                    </a>
                 {{/if}}
             </div>
             <div class="category">
@@ -26,4 +30,19 @@
         </li>
     {{/each}}
     </ul>
+    <script>
+        document.querySelectorAll(".delete-link").forEach(link => {
+            link.addEventListener("click", async (e) => {
+            e.preventDefault();
+            if (!confirm("Tem certeza que deseja excluir esta ideia?")) return;
+
+            const res = await fetch(link.href, { method: "POST" });
+            if (res.ok) {
+                location.reload();
+            } else {
+                alert("Erro ao excluir ideia.");
+            }
+            });
+        });
+    </script>
 </div>
