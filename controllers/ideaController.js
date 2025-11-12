@@ -6,11 +6,14 @@ const ideaController = {
     try {
       const ideas = await Idea.find().sort({ createdAt: -1 }).lean();
 
+      console.log("Ideias:", ideas);
+
       for (let idea of ideas) {
         const votes = await Vote.find({ ideaId: idea._id }).populate('userId', 'username').lean();
 
         idea.likes = votes.filter(v => v.type === 'like').map(v => v.userId.username);
         idea.dislikes = votes.filter(v => v.type === 'dislike').map(v => v.userId.username);
+        idea.isOwner = idea.createdBy === req.session.user.username;
       }
 
       res.render("ideas/list", { ideas, user: req.session.user });
@@ -32,7 +35,7 @@ const ideaController = {
         title,
         description,
         category,
-        createdBy: req.session.user?._id || null,
+        createdBy: req.session.user.username,
       });
 
       await newIdea.save();
