@@ -13,7 +13,7 @@ body {
     background-color: #FAFAFA;
 }
 
-.login-page, .register-page {
+.login-page, .register-page, .createIdea {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -22,7 +22,7 @@ body {
 }
 
 /* Container do formulário */
-.login-form, .register-form {
+.login-form, .register-form, .create-form {
     background-color: #fff;
     padding: 2rem 3rem;
     border-radius: 12px;
@@ -95,7 +95,7 @@ p a:hover {
     color: #1976D2;
 }
 
-.listHeader{
+.listHeader, .createHeader{
     position: fixed;
     top: 0;
     width: 100%;
@@ -109,7 +109,7 @@ p a:hover {
     justify-content: end;
 }
 
-.listHeader button{
+.listHeader button, .createHeader button{
     margin-right: 20px;
 }
 
