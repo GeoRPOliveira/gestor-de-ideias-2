@@ -3,45 +3,82 @@
         <a href="/ideas/create"><button>Criar Ideia</button></a>
         <a href="/logout"><button>Logout</button></a>
     </header>
+
     <ul class="ideasGrid">
-    {{#each ideas}}
+        {{#each ideas}}
         <li class="ideaCard" data-id="{{this._id}}">
-        <h3>{{this.title}}</h3>
-        <h5 class="voteCount">{{this.likes.length}} voto(s)</h5>
-        <p>Por: {{this.createdBy}}</p>
-        <hr />
-        <p class="description">{{this.description}}</p>
-        <div class="info">
-            <div class="info-left">
-                <button class="like">Votar</button>
-                {{#if this.isOwner}}
-                    <a href="/ideas/{{this._id}}/delete" class="delete-link">
-                        <img src="images/lixeira.svg" alt="lixeira">
-                    </a>
-                    <a href="/ideas/{{this._id}}/edit">
-                        <img src="images/brush.svg" alt="brush">
-                    </a>
-                {{/if}}
+            <h3>{{this.title}}</h3>
+            <h5 class="voteCount">{{this.likes.length}} voto(s)</h5>
+            <p>Por: {{this.createdBy}}</p>
+            <hr />
+            <p class="description">{{this.description}}</p>
+
+            <div class="info">
+                <div class="info-left">
+                    <button class="like">Votar</button>
+
+                    {{#if this.isOwner}}
+                        <a href="/ideas/{{this._id}}/delete" class="delete-link">
+                            <img src="/images/lixeira.svg" alt="lixeira">
+                        </a>
+                        <a href="/ideas/{{this._id}}/edit">
+                            <img src="/images/brush.svg" alt="brush">
+                        </a>
+                    {{/if}}
+                </div>
+
+                <div class="category">
+                    {{this.category}}
+                </div>
             </div>
-            <div class="category">
-                {{this.category}}
-            </div>
-        </div>
         </li>
-    {{/each}}
+        {{/each}}
     </ul>
+
     <script>
+        // 🗑️ Lógica de exclusão
         document.querySelectorAll(".delete-link").forEach(link => {
             link.addEventListener("click", async (e) => {
-            e.preventDefault();
-            if (!confirm("Tem certeza que deseja excluir esta ideia?")) return;
+                e.preventDefault();
+                if (!confirm("Tem certeza que deseja excluir esta ideia?")) return;
 
-            const res = await fetch(link.href, { method: "POST" });
-            if (res.ok) {
-                location.reload();
-            } else {
-                alert("Erro ao excluir ideia.");
-            }
+                const res = await fetch(link.href, { method: "POST" });
+                if (res.ok) {
+                    location.reload();
+                } else {
+                    alert("Erro ao excluir ideia.");
+                }
+            });
+        });
+
+        // ❤️ Lógica de votos (toggle)
+        document.querySelectorAll(".like").forEach(button => {
+            button.addEventListener("click", async (e) => {
+                const ideaCard = e.target.closest(".ideaCard");
+                const ideaId = ideaCard.getAttribute("data-id");
+                const voteCountElem = ideaCard.querySelector(".voteCount");
+
+                try {
+                    const res = await fetch(`/votes/${ideaId}`, {
+                        method: "POST",
+                    });
+
+                    if (!res.ok) {
+                        const text = await res.text();
+                        throw new Error(text || "Erro ao votar.");
+                    }
+
+                    const data = await res.json();
+
+                    if (data.success) {
+                        voteCountElem.textContent = `${data.voteCount} voto(s)`;
+                    } else {
+                        alert("Erro ao votar.");
+                    }
+                } catch (err) {
+                    console.error(err);
+                    alert("Erro ao votar. Verifique se você está logado.");
+                }
             });
         });
     </script>
