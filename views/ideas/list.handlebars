@@ -8,10 +8,17 @@
         <li class="ideaCard" data-id="{{this._id}}">
         <h3>{{this.title}}</h3>
         <h5 class="voteCount">{{this.likes.length}} voto(s)</h5>
+        <p>Por: {{this.createdBy}}</p>
         <hr />
         <p>{{this.description}}</p>
         <div class="info">
-            <button class="like">Votar</button>
+            <div>
+                <button class="like">Votar</button>
+                {{#if this.isOwner}}
+                    <a href=""><img src="images/lixeira.svg" alt="lixeira"></a>
+                    <a href=""><img src="images/brush.svg" alt="brush"></a>
+                {{/if}}
+            </div>
             <div class="category">
                 {{this.category}}
             </div>

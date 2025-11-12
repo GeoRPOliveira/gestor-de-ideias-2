@@ -7,7 +7,7 @@ const ideaSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
   votes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  createdBy: { type: String, ref: "User" },
 });
 
 const Idea = mongoose.model("Idea", ideaSchema);
