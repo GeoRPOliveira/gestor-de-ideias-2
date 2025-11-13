@@ -139,11 +139,58 @@ p a:hover {
   max-width: 47vw;
 }
 
-.ideaCard hr {
+.detailIdea {
+    margin-top: 6rem;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.detailCard {
+    background-color: white;
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60vw;
+    margin-bottom: 2rem;
+}
+
+.infoOwner{
+    background-color: white;
+    border-radius: 12px;
+    padding: 1rem 2rem;
+    display: flex;
+    text-align: center;
+    font-weight: bolder;
+    font-size: large;
+}
+
+.ideaCard hr, .detailCard hr {
+  background-color: #D3D3D3;
   width: 100%;
   border: none;
   border-top: 1px solid #D3D3D3;
   margin: 8px 0;
+}
+
+.infoDetails {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-self: flex-start;
+    justify-content: space-between;
+    width: fit-content
+}
+
+.descriptionDetail {
+  max-width: 80%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .description {
@@ -151,6 +198,12 @@ p a:hover {
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .info{
@@ -174,4 +227,11 @@ p a:hover {
     background-color: #AAD5E3;
     padding: 0.5rem;
     border-radius: 8px;
+}
+
+.categoryDetail{
+    background-color: #AAD5E3;
+    padding: 0.5rem;
+    border-radius: 8px;
+    margin-right: 1rem;
 }

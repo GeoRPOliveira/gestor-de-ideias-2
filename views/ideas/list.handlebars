@@ -81,5 +81,16 @@
                 }
             });
         });
+
+        // 🪄 Redirecionar ao clicar no card
+        document.querySelectorAll(".ideaCard").forEach(card => {
+            card.addEventListener("click", (e) => {
+                // Ignora cliques em botões, links ou imagens dentro do card
+                if (e.target.closest("button, a, img")) return;
+
+                const ideaId = card.getAttribute("data-id");
+                window.location.href = `/ideas/${ideaId}`;
+            });
+        });
     </script>
 </div>
