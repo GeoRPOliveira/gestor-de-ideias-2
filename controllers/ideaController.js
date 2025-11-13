@@ -102,7 +102,7 @@ const ideaController = {
         return res.status(403).send("Você não tem permissão para editar esta ideia.");
       }
 
-      res.render("/ideas/edit", { idea, user: req.session.user });
+      res.render("ideas/edit", { idea, user: req.session.user });
     } catch (err) {
       console.error(err);
       res.status(500).send("Erro ao carregar o formulário de edição.");
