@@ -22,7 +22,7 @@ body {
 }
 
 /* Container do formulário */
-.login-form, .register-form, .create-form {
+.login-form, .register-form, .create-form, .edit-form {
     background-color: #fff;
     padding: 2rem 3rem;
     border-radius: 12px;
@@ -136,6 +136,7 @@ p a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 47vw;
 }
 
 .ideaCard hr {
@@ -145,12 +146,28 @@ p a:hover {
   margin: 8px 0;
 }
 
+.description {
+  max-width: 80%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
 .info{
     width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.info-left{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 16vw;
 }
 
 .category{

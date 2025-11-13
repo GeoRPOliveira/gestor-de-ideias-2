@@ -6,8 +6,6 @@ const ideaController = {
     try {
       const ideas = await Idea.find().sort({ createdAt: -1 }).lean();
 
-      console.log("Ideias:", ideas);
-
       for (let idea of ideas) {
         const votes = await Vote.find({ ideaId: idea._id }).populate('userId', 'username').lean();
 
@@ -64,6 +62,79 @@ const ideaController = {
       res.status(500).send("Erro ao carregar detalhes da ideia.");
     }
   },
+
+  async deleteIdea(req, res) {
+    try {
+      const { id } = req.params;
+
+      // Busca a ideia pelo ID
+      const idea = await Idea.findById(id);
+
+      if (!idea) {
+        return res.status(404).send("Ideia não encontrada.");
+      }
+
+      // 🔒 Verifica se o usuário logado é o criador
+      if (idea.createdBy !== req.session.user.username) {
+        return res.status(403).send("Você não tem permissão para excluir esta ideia.");
+      }
+
+      // Deleta a ideia
+      await Idea.findByIdAndDelete(id);
+
+      console.log(`Ideia ${id} deletada com sucesso por ${req.session.user.username}`);
+      res.redirect("/ideas");
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Erro ao excluir a ideia.");
+    }
+  },
+
+  async editIdeaForm(req, res) {
+    try {
+      const { id } = req.params;
+      const idea = await Idea.findById(id).lean();
+
+      if (!idea) return res.status(404).send("Ideia não encontrada.");
+
+      // Só o dono pode editar
+      if (idea.createdBy !== req.session.user.username) {
+        return res.status(403).send("Você não tem permissão para editar esta ideia.");
+      }
+
+      res.render("/ideas/edit", { idea, user: req.session.user });
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Erro ao carregar o formulário de edição.");
+    }
+  },
+
+  async updateIdea(req, res) {
+    try {
+      const { id } = req.params;
+      const { title, description, category } = req.body;
+
+      const idea = await Idea.findById(id);
+
+      if (!idea) return res.status(404).send("Ideia não encontrada.");
+
+      // Confere se o usuário logado é o dono
+      if (idea.createdBy !== req.session.user.username) {
+        return res.status(403).send("Você não pode editar esta ideia.");
+      }
+
+      idea.title = title;
+      idea.description = description;
+      idea.category = category;
+
+      await idea.save();
+      res.redirect("/ideas");
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Erro ao atualizar a ideia.");
+    }
+  },
+
 };
 
 export default ideaController;

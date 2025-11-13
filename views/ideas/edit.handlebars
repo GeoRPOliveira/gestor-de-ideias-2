@@ -1,0 +1,21 @@
+<div class="createIdea">
+    <header class="createHeader">
+        <a href="/ideas"><button>Voltar</button></a>
+        <a href="/logout"><button>Logout</button></a>
+    </header>
+    <form action="/ideas/{{idea._id}}/edit" method="POST" class="edit-form">
+        <h1>Editar Ideia</h1>
+        <label for="title">Título:</label>
+        <input type="text" id="title" name="title" value="{{idea.title}}" required />
+
+        <label for="description">Descrição:</label>
+        <textarea id="description" name="description" rows="4" required>{{idea.description}}</textarea>
+
+        <label for="category">Categoria:</label>
+        <input type="text" id="category" name="category" value="{{idea.category}}" required />
+
+        <button type="submit">Salvar Alterações</button>
+        <a href="/ideas">Voltar</a>
+    </form>
+</div>
+
