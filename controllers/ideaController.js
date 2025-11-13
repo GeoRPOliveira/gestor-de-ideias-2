@@ -47,16 +47,14 @@ const ideaController = {
   async ideaDetails(req, res) {
     try {
       const { id } = req.params;
-      const idea = await Idea.findById(id).populate("createdBy", "username").lean();
+      const idea = await Idea.findById(id).lean();
 
       if (!idea) return res.status(404).send("Ideia não encontrada");
 
       const votes = await Vote.find({ ideaId: id }).populate('userId', 'username').lean();
-
       idea.likes = votes.filter(v => v.type === 'like').map(v => v.userId.username);
-      idea.dislikes = votes.filter(v => v.type === 'dislike').map(v => v.userId.username);
 
-      res.render("ideas/details", { idea, user: req.session.user });
+      res.render("ideas/detail", { idea, user: req.session.user });
     } catch (err) {
       console.error(err);
       res.status(500).send("Erro ao carregar detalhes da ideia.");

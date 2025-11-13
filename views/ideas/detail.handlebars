@@ -1,0 +1,20 @@
+<header class="listHeader">
+    <a href="/ideas"><button>Voltar</button></a>
+    <a href="/logout"><button>Logout</button></a>
+</header>
+<div class="detailIdea">
+    <div class="detailCard">
+        <h1>{{idea.title}}</h1>
+        <hr>
+        <div class="infoDetails">
+            <div class="categoryDetail">
+                {{idea.category}}
+            </div>
+            <h5 class="voteCount">{{idea.likes.length}} voto(s)</h5>
+        </div>
+        <p class="descriptionDetail">{{idea.description}}</p>
+    </div>
+    <div class="infoOwner">
+        <h3>Feito por: {{idea.createdBy}}</h3>
+    </div>
+</div>
