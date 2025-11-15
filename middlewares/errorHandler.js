@@ -1,5 +1,5 @@
 export function errorHandler(err, req, res, next) {
-  console.error("🔥 Erro detectado:", err.stack || err.message);
+  console.error("Erro detectado:", err.stack || err.message);
 
   if (err.status === 403) {
     return res.status(403).render("error", {

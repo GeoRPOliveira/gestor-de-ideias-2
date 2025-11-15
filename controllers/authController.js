@@ -50,7 +50,6 @@ const authController = {
         name: user.name,
         username: user.username
       };
-      console.log("SESSION SET:", req.session.user);
 
       res.redirect("/ideas");
     } catch (err) {

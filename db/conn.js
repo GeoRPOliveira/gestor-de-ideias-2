@@ -16,7 +16,7 @@ export async function connectDB() {
     mongoose.connection.useDb("idea_manager");
     
   } catch (err) {
-    console.error("❌ Erro ao conectar ao MongoDB:", err.message);
+    console.error("Erro ao conectar ao MongoDB:", err.message);
     process.exit(1);
   }
 }
