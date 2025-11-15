@@ -35,13 +35,10 @@ app.use(
     saveUninitialized: false,
   })
 );
-
-// Rotas
 app.use("/", authRoutes);
 app.use("/ideas", ideaRoutes);
 app.use("/votes", voteRoutes);
 
-// Redireciona para login
 app.get("/", (req, res) => {
   res.redirect("/login");
 });

@@ -36,7 +36,6 @@
     </ul>
 
     <script>
-        // 🗑️ Lógica de exclusão
         document.querySelectorAll(".delete-link").forEach(link => {
             link.addEventListener("click", async (e) => {
                 e.preventDefault();
@@ -51,7 +50,6 @@
             });
         });
 
-        // ❤️ Lógica de votos (toggle)
         document.querySelectorAll(".like").forEach(button => {
             button.addEventListener("click", async (e) => {
                 const ideaCard = e.target.closest(".ideaCard");
@@ -82,10 +80,8 @@
             });
         });
 
-        // 🪄 Redirecionar ao clicar no card
         document.querySelectorAll(".ideaCard").forEach(card => {
             card.addEventListener("click", (e) => {
-                // Ignora cliques em botões, links ou imagens dentro do card
                 if (e.target.closest("button, a, img")) return;
 
                 const ideaId = card.getAttribute("data-id");

@@ -65,19 +65,16 @@ const ideaController = {
     try {
       const { id } = req.params;
 
-      // Busca a ideia pelo ID
       const idea = await Idea.findById(id);
 
       if (!idea) {
         return res.status(404).send("Ideia não encontrada.");
       }
 
-      // 🔒 Verifica se o usuário logado é o criador
       if (idea.createdBy !== req.session.user.username) {
         return res.status(403).send("Você não tem permissão para excluir esta ideia.");
       }
 
-      // Deleta a ideia
       await Idea.findByIdAndDelete(id);
 
       console.log(`Ideia ${id} deletada com sucesso por ${req.session.user.username}`);
@@ -95,7 +92,6 @@ const ideaController = {
 
       if (!idea) return res.status(404).send("Ideia não encontrada.");
 
-      // Só o dono pode editar
       if (idea.createdBy !== req.session.user.username) {
         return res.status(403).send("Você não tem permissão para editar esta ideia.");
       }
@@ -116,7 +112,6 @@ const ideaController = {
 
       if (!idea) return res.status(404).send("Ideia não encontrada.");
 
-      // Confere se o usuário logado é o dono
       if (idea.createdBy !== req.session.user.username) {
         return res.status(403).send("Você não pode editar esta ideia.");
       }
